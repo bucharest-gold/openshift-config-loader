@@ -7,3 +7,19 @@
 Node.js based client for loading an Openshift config file.
 
 Defaults to the ~/.kube/config file
+
+### Example Usage
+
+Install the dependecy
+
+    npm install openshift-config-loader
+
+Code:
+
+    'use strict';
+
+    const openshiftConfigLoader = require('openshift-config-loader');
+
+    openshiftConfigLoader().then((config) => {
+      console.log(config);
+    });
