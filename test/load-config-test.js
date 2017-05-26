@@ -11,6 +11,7 @@ test('test loading of non-default config', (t) => {
   };
 
   openshiftConfigLoader(settings).then((config) => {
+    t.ok(config.apiVersion, 'should have an api version prop');
     t.ok(config.context.cluster, 'should have the context cluster prop');
     t.ok(config.context.namespace, 'should have the context namespace prop');
     t.ok(config.context.user, 'should have the context user prop');
