@@ -62,7 +62,7 @@ test('test loading of default config', (t) => {
     }
   };
 
-  const configLoader = proxyquire('../lib/openshift-config-loader', {
+  const configLoader = proxyquire('../lib/kube-config-loader', {
     'fs': stubbedFs
   });
 
