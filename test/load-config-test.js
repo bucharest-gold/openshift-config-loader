@@ -84,3 +84,68 @@ test('test loading of config, error', (t) => {
     t.end();
   });
 });
+
+test('test using service account', (t) => {
+  // Need to stub the config loader for this tests
+  const stubbedKubeConfigLoader = () => {
+    return Promise.reject(new Error('config not found'));
+  };
+
+  const stubbedServiceAccountLoader = () => {
+    return Promise.resolve();
+  };
+
+  const configLoader = proxyquire('../lib/openshift-config-loader', {
+    './kube-config-loader': stubbedKubeConfigLoader,
+    './service-account-loader': stubbedServiceAccountLoader
+  });
+
+  configLoader().then((config) => {
+    t.pass('service account was called');
+    t.end();
+  });
+});
+
+test('test using service account with the true option', (t) => {
+  // Need to stub the config loader for this tests
+  const stubbedKubeConfigLoader = () => {
+    return Promise.reject(new Error('config not found'));
+  };
+
+  const stubbedServiceAccountLoader = () => {
+    return Promise.resolve();
+  };
+
+  const configLoader = proxyquire('../lib/openshift-config-loader', {
+    './kube-config-loader': stubbedKubeConfigLoader,
+    './service-account-loader': stubbedServiceAccountLoader
+  });
+
+  configLoader({tryServiceAccount: true}).then((config) => {
+    t.pass('service account was called with the true option');
+    t.end();
+  });
+});
+
+test('test not using service account', (t) => {
+  // Need to stub the config loader for this tests
+  const stubbedKubeConfigLoader = () => {
+    return Promise.reject(new Error('config not found'));
+  };
+
+  const stubbedServiceAccountLoader = () => {
+    // shouldn't get here
+    t.fail();
+    return Promise.reject(new Error('service account failed'));
+  };
+
+  const configLoader = proxyquire('../lib/openshift-config-loader', {
+    './kube-config-loader': stubbedKubeConfigLoader,
+    './service-account-loader': stubbedServiceAccountLoader
+  });
+
+  configLoader({tryServiceAccount: false}).catch((err) => {
+    t.equal('config not found', err.message, 'error message should be from the default config loader');
+    t.end();
+  });
+});

@@ -23,3 +23,20 @@ Code:
     openshiftConfigLoader().then((config) => {
       console.log(config);
     });
+
+#### How It Works
+
+First, the config loader will look, by default, a file named `~/.kube/config` .  If it can't find it, then the config loader will try loading the config as a service account.
+
+You can turn off the service account lookup by either passing an `options` object with the property `options.tryServiceAccount` equal to `false` or set an environment variable named `KUBERNETES_AUTH_TRYSERVICEACCOUNT` equal to false
+
+
+For Example:
+
+    const options = {
+      tryServiceAccount: false
+    };
+
+    openshiftConfigLoader(options).then((config) => {
+      console.log(config);
+    });
