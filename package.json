@@ -1,6 +1,6 @@
 {
   "name": "openshift-config-loader",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Loading of Openshift configurations",
   "main": "index.js",
   "scripts": {
