@@ -42,7 +42,7 @@
     "js-yaml": "^3.8.4"
   },
   "devDependencies": {
-    "coveralls": "^2.13.1",
+    "coveralls": "^3.0.0",
     "eslint": "^4.3.0",
     "eslint-config-semistandard": "^11.0.0",
     "eslint-config-standard": "^10.2.1",
