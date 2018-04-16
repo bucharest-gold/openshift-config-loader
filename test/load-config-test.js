@@ -1,30 +1,30 @@
 'use strict';
-
+/* eslint promise/prefer-await-to-then: "off" */
 const test = require('tape');
 
 const proxyquire = require('proxyquire');
 
-test('test loading of non-default config', (t) => {
-  const openshiftConfigLoader = require('../');
+test('test loading of non-default config', t => {
+  const openshiftConfigLoader = require('..');
   const settings = {
     configLocation: `${__dirname}/test-config`
   };
 
-  openshiftConfigLoader(settings).then((config) => {
+  openshiftConfigLoader(settings).then(config => {
     t.ok(config.apiVersion, 'should have an api version prop');
     t.ok(config.context.cluster, 'should have the context cluster prop');
     t.ok(config.context.namespace, 'should have the context namespace prop');
     t.ok(config.context.user, 'should have the context user prop');
 
-    // context user object
+    // Context user object
     t.ok(config.user.token, 'should have the user token prop');
     t.ok(config.cluster, 'should have the cluster prop');
     t.end();
   });
 });
 
-test('test loading of default config', (t) => {
-  // probably a better way to do this.
+test('test loading of default config', t => {
+  // Probably a better way to do this.
   const tempConfigYaml = `
     apiVersion: v1
     clusters:
@@ -63,18 +63,18 @@ test('test loading of default config', (t) => {
   };
 
   const configLoader = proxyquire('../lib/kube-config-loader', {
-    'fs': stubbedFs
+    fs: stubbedFs
   });
 
-  // accessing the configLoader directly here, with no options
-  configLoader().then((config) => {
+  // Accessing the configLoader directly here, with no options
+  configLoader().then(_ => {
     t.pass('load config using DEFAULT_CONFIG_LOCATION');
     t.end();
   });
 });
 
-test('test loading of config, error', (t) => {
-  const openshiftConfigLoader = require('../');
+test('test loading of config, error', t => {
+  const openshiftConfigLoader = require('..');
   const settings = {
     configLocation: `${__dirname}/test-config-not-here`
   };
@@ -85,7 +85,7 @@ test('test loading of config, error', (t) => {
   });
 });
 
-test('test using service account', (t) => {
+test('test using service account', t => {
   // Need to stub the config loader for this tests
   const stubbedKubeConfigLoader = () => {
     return Promise.reject(new Error('config not found'));
@@ -100,13 +100,13 @@ test('test using service account', (t) => {
     './service-account-loader': stubbedServiceAccountLoader
   });
 
-  configLoader().then((config) => {
+  configLoader().then(_ => {
     t.pass('service account was called');
     t.end();
   });
 });
 
-test('test using service account with the true option', (t) => {
+test('test using service account with the true option', t => {
   // Need to stub the config loader for this tests
   const stubbedKubeConfigLoader = () => {
     return Promise.reject(new Error('config not found'));
@@ -121,20 +121,20 @@ test('test using service account with the true option', (t) => {
     './service-account-loader': stubbedServiceAccountLoader
   });
 
-  configLoader({tryServiceAccount: true}).then((config) => {
+  configLoader({tryServiceAccount: true}).then(_ => {
     t.pass('service account was called with the true option');
     t.end();
   });
 });
 
-test('test not using service account', (t) => {
+test('test not using service account', t => {
   // Need to stub the config loader for this tests
   const stubbedKubeConfigLoader = () => {
     return Promise.reject(new Error('config not found'));
   };
 
   const stubbedServiceAccountLoader = () => {
-    // shouldn't get here
+    // Shouldn't get here
     t.fail();
     return Promise.reject(new Error('service account failed'));
   };
@@ -144,7 +144,7 @@ test('test not using service account', (t) => {
     './service-account-loader': stubbedServiceAccountLoader
   });
 
-  configLoader({tryServiceAccount: false}).catch((err) => {
+  configLoader({tryServiceAccount: false}).catch(err => {
     t.equal('config not found', err.message, 'error message should be from the default config loader');
     t.end();
   });

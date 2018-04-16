@@ -3,7 +3,7 @@
 const test = require('tape');
 const proxyquire = require('proxyquire');
 
-test('service account lookup test - error', (t) => {
+test('service account lookup test - error', t => {
   // Need to stub the config loader for this tests
   const stubbedUtil = {
     promisify: () => {
@@ -14,7 +14,7 @@ test('service account lookup test - error', (t) => {
   };
 
   const serviceAccountLoader = proxyquire('../lib/service-account-loader', {
-    'util': stubbedUtil
+    util: stubbedUtil
   });
 
   serviceAccountLoader().catch(() => {
@@ -23,11 +23,11 @@ test('service account lookup test - error', (t) => {
   });
 });
 
-test('service account lookup test', (t) => {
+test('service account lookup test', t => {
   // Need to stub the config loader for this tests
   const stubbedUtil = {
     promisify: () => {
-      return (path) => {
+      return path => {
         switch (path) {
           case '/var/run/secrets/kubernetes.io/serviceaccount/token':
             return Promise.resolve('token');
@@ -43,10 +43,11 @@ test('service account lookup test', (t) => {
   };
 
   const serviceAccountLoader = proxyquire('../lib/service-account-loader', {
-    'util': stubbedUtil
+    util: stubbedUtil
   });
 
-  serviceAccountLoader().then((configObject) => {
+  /* eslint promise/prefer-await-to-then: "off" */
+  serviceAccountLoader().then(configObject => {
     t.equal(configObject.context.namespace, 'namespace', 'has a namespace value');
     t.equal(configObject.user.token, 'token', 'has a token value');
     t.equal(configObject.user.ca, 'ca.crt', 'has a ca value');
