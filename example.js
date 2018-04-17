@@ -1,7 +1,8 @@
 'use strict';
 
-const openshiftConfigLoader = require('./');
+const openshiftConfigLoader = require('.');
 
-openshiftConfigLoader().then((config) => {
+/* eslint promise/prefer-await-to-then: "off" */
+openshiftConfigLoader().then(config => {
   console.log(config);
 });
