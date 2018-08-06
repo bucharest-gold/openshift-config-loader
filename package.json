@@ -15,6 +15,9 @@
   "xo": {
     "space": 2,
     "rules": {
+      "prefer-object-spread": [
+        "off"
+      ],
       "space-before-function-paren": [
         "error",
         "always"
