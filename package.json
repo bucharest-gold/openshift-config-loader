@@ -15,6 +15,9 @@
   "xo": {
     "space": 2,
     "rules": {
+      "prefer-object-spread": [
+        "off"
+      ],
       "space-before-function-paren": [
         "error",
         "always"
@@ -59,6 +62,6 @@
     "standard-version": "^4.3.0",
     "tap-spec": "^5.0.0",
     "tape": "^4.6.3",
-    "xo": "~0.21.0"
+    "xo": "~0.22.0"
   }
 }
