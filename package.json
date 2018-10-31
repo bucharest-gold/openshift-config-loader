@@ -47,9 +47,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "bucharest-gold/openshift-config-loader"
+    "url": "https://github.com/nodeshift/openshift-config-loader"
   },
-  "bugs": "https://github.com/bucharest-gold/openshift-config-loader/issues",
+  "bugs": "https://github.com/nodeshift/openshift-config-loader/issues",
   "license": "Apache-2.0",
   "dependencies": {
     "js-yaml": "^3.8.4"
