@@ -6,7 +6,6 @@
   "scripts": {
     "lint": "xo",
     "test": "tape test/*-test.js | tap-spec",
-    "prepublish": "nsp check",
     "coverage": "nyc npm test",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "ci": "npm run lint && npm run coveralls",
@@ -56,7 +55,6 @@
   },
   "devDependencies": {
     "coveralls": "^3.0.0",
-    "nsp": "^3.1.0",
     "nyc": "^12.0.2",
     "proxyquire": "^2.0.0",
     "standard-version": "^4.3.0",
