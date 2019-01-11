@@ -144,8 +144,8 @@ test('test not using service account', t => {
     './service-account-loader': stubbedServiceAccountLoader
   });
 
-  configLoader({tryServiceAccount: false}).catch(err => {
-    t.equal('config not found', err.message, 'error message should be from the default config loader');
+  configLoader({tryServiceAccount: false}).catch(error => {
+    t.equal('config not found', error.message, 'error message should be from the default config loader');
     t.end();
   });
 });
