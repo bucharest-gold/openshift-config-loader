@@ -59,7 +59,7 @@
     "proxyquire": "~2.1.0",
     "standard-version": "~4.4.0",
     "tap-spec": "^5.0.0",
-    "tape": "~4.9.2",
+    "tape": "~4.10.0",
     "xo": "~0.24.0"
   }
 }
