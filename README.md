@@ -1,3 +1,7 @@
+# DEPRECATED
+
+This is no longer supported.
+
 [![Build Status](https://travis-ci.org/nodeshift/openshift-config-loader.svg?branch=master)](https://travis-ci.org/nodeshift/openshift-config-loader)  [![Coverage Status](https://coveralls.io/repos/github/nodeshift/openshift-config-loader/badge.svg?branch=master)](https://coveralls.io/github/nodeshift/openshift-config-loader?branch=master)
 
 ### Openshift Config Loader
